@@ -1,0 +1,330 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpklryqe0s8av"]
+
+[ext_resource type="Script" path="res://brawl/brawl_ring.gd" id="1_hpste"]
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="1_ngxh4"]
+[ext_resource type="Script" path="res://brawl/enemy_spawn_timer.gd" id="2_mah88"]
+[ext_resource type="PackedScene" uid="uid://b3totobanahjr" path="res://player/player.tscn" id="3_0vn1n"]
+[ext_resource type="Script" path="res://ring/animation_player.gd" id="4_f887g"]
+[ext_resource type="PackedScene" uid="uid://6acc0l0s2f0v" path="res://ring/base_ring.tscn" id="4_siw2y"]
+[ext_resource type="Script" path="res://brawl/enemyspawner.gd" id="6_or1ml"]
+[ext_resource type="PackedScene" uid="uid://by3sif1rqere" path="res://target/target.tscn" id="7_my3hc"]
+[ext_resource type="Script" path="res://brawl/general_script_node.gd" id="9_8ro3i"]
+
+[sub_resource type="Animation" id="Animation_7se5h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_52k1c"]
+resource_name = "enter_ring"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0, 50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ii0ji"]
+_data = {
+"RESET": SubResource("Animation_7se5h"),
+"enter_ring": SubResource("Animation_52k1c")
+}
+
+[node name="BrawlRing" type="Node"]
+script = ExtResource("1_hpste")
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+script = ExtResource("2_mah88")
+
+[node name="SlideInMenu" type="CanvasLayer" parent="."]
+layer = 5
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+follow_viewport_enabled = true
+script = ExtResource("1_ngxh4")
+
+[node name="BaseRing" parent="SlideInMenu" instance=ExtResource("4_siw2y")]
+anchor_left = -0.126
+anchor_top = -0.128
+anchor_right = 0.124
+anchor_bottom = 0.121
+offset_left = 0.152008
+offset_top = 0.194
+offset_right = 0.151993
+offset_bottom = -0.15802
+
+[node name="YSortNode" type="Node2D" parent="SlideInMenu"]
+
+[node name="Player" parent="SlideInMenu/YSortNode" instance=ExtResource("3_0vn1n")]
+position = Vector2(0, 100)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlideInMenu/YSortNode/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_ii0ji")
+}
+autoplay = "enter_ring"
+script = ExtResource("4_f887g")
+
+[node name="EnemySpawner" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(32, -24)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner2" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-32, -24)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner3" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-96, 32)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner4" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-57.5, -15.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner5" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(72, 40)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner6" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(0, 48)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner7" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-48.5, 48)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner8" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-40, 19)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner9" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-67.5, 19)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner10" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-8, 10.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner11" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-40, 0)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner12" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-79, -15.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner13" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-112, 56)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner14" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-79, 56)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner15" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-16, 40)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner16" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-32, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner17" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(32, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner18" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(32, 32.5)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner19" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(32, 0)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner20" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(16, 10.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner21" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(16, 32.5)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner22" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(0, -15.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner23" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(54.75, -15.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner24" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(54.75, 10.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner25" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(54.75, 32.5)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner26" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(54.75, 56)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner27" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(72, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner28" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(94.75, 56)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner29" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(105.5, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner30" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(94.75, 32.5)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner31" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(72, 19)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner32" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(85.25, 0)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner33" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(72, -15.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner34" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-79, 40)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner35" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-57.5, 32.5)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner36" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-87.75, 10.75)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner37" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-65, 0)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner38" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-22.75, -8)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner39" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(16, -8)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner40" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-64, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner41" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-96, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner42" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-96, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner43" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-96, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="EnemySpawner44" type="Node2D" parent="SlideInMenu/YSortNode"]
+position = Vector2(-96, 67)
+script = ExtResource("6_or1ml")
+enemy_scene = ExtResource("7_my3hc")
+
+[node name="GeneralScriptNode" type="Node" parent="."]
+script = ExtResource("9_8ro3i")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="animation_finished" from="SlideInMenu/YSortNode/Player/AnimationPlayer" to="SlideInMenu/YSortNode/Player/AnimationPlayer" method="_on_animation_finished"]

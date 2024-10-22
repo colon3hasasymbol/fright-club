@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://df4moxqc20f5u"
+path="res://.godot/imported/Fright Club (Menu Theme).wav-c092dfb8f0e7b2f3b10c56efe21cab57.sample"
+
+[deps]
+
+source_file="res://music/Fright Club (Menu Theme).wav"
+dest_files=["res://.godot/imported/Fright Club (Menu Theme).wav-c092dfb8f0e7b2f3b10c56efe21cab57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

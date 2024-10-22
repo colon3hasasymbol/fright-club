@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://chtpnpktn7pnf"]
+
+[ext_resource type="PackedScene" uid="uid://b3totobanahjr" path="res://player/player.tscn" id="1_8cdtu"]
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="2_cnldb"]
+[ext_resource type="PackedScene" uid="uid://by3sif1rqere" path="res://target/target.tscn" id="2_uyae2"]
+[ext_resource type="PackedScene" uid="uid://6acc0l0s2f0v" path="res://ring/base_ring.tscn" id="3_jfgii"]
+[ext_resource type="Script" path="res://ring/animation_player.gd" id="4_u5sfh"]
+[ext_resource type="Script" path="res://brawl/general_script_node.gd" id="6_bonbc"]
+
+[sub_resource type="Animation" id="Animation_7se5h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_52k1c"]
+resource_name = "enter_ring"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0, 50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ii0ji"]
+_data = {
+"RESET": SubResource("Animation_7se5h"),
+"enter_ring": SubResource("Animation_52k1c")
+}
+
+[node name="Ring" type="Node" groups=["levels"]]
+
+[node name="SlideInMenu" type="CanvasLayer" parent="."]
+layer = 2
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+follow_viewport_enabled = true
+script = ExtResource("2_cnldb")
+
+[node name="BaseRing" parent="SlideInMenu" instance=ExtResource("3_jfgii")]
+anchor_left = -0.125
+anchor_top = -0.125
+anchor_right = 0.125
+anchor_bottom = 0.123
+offset_right = -288.0
+offset_bottom = -160.704
+
+[node name="YSortNode" type="Node2D" parent="SlideInMenu"]
+y_sort_enabled = true
+
+[node name="Player" parent="SlideInMenu/YSortNode" instance=ExtResource("1_8cdtu")]
+position = Vector2(0, 100)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlideInMenu/YSortNode/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_ii0ji")
+}
+autoplay = "enter_ring"
+script = ExtResource("4_u5sfh")
+
+[node name="Target" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(-86, 54)
+damage = 100
+time_before_punch = 3.0
+SPEED = 500
+
+[node name="Target4" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(-2, -6)
+damage = 100
+time_before_punch = 3.0
+SPEED = 500
+
+[node name="Target2" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(86, 52)
+
+[node name="Target5" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(-48, -8)
+
+[node name="Target6" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(62, 6)
+
+[node name="Target3" parent="SlideInMenu/YSortNode" instance=ExtResource("2_uyae2")]
+position = Vector2(-96, -8)
+
+[node name="GeneralScriptNode" type="Node" parent="."]
+script = ExtResource("6_bonbc")
+
+[connection signal="animation_finished" from="SlideInMenu/YSortNode/Player/AnimationPlayer" to="SlideInMenu/YSortNode/Player/AnimationPlayer" method="_on_animation_finished"]

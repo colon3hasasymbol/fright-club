@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://7y0vfk2dv13"]
+
+[ext_resource type="PackedScene" uid="uid://b3totobanahjr" path="res://player/player.tscn" id="1_ek1ap"]
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="2_nlf4k"]
+[ext_resource type="PackedScene" uid="uid://by3sif1rqere" path="res://target/target.tscn" id="2_rgtgn"]
+[ext_resource type="PackedScene" uid="uid://6acc0l0s2f0v" path="res://ring/base_ring.tscn" id="3_7oxhc"]
+[ext_resource type="Script" path="res://ring/animation_player.gd" id="4_4ovd5"]
+[ext_resource type="Script" path="res://brawl/general_script_node.gd" id="5_oguja"]
+
+[sub_resource type="Animation" id="Animation_7se5h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_52k1c"]
+resource_name = "enter_ring"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0, 50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ii0ji"]
+_data = {
+"RESET": SubResource("Animation_7se5h"),
+"enter_ring": SubResource("Animation_52k1c")
+}
+
+[node name="Ring2" type="Node" groups=["levels"]]
+
+[node name="SlideInMenu" type="CanvasLayer" parent="."]
+layer = 2
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+follow_viewport_enabled = true
+script = ExtResource("2_nlf4k")
+
+[node name="BaseRing" parent="SlideInMenu" instance=ExtResource("3_7oxhc")]
+anchor_left = -0.122
+anchor_top = -0.121
+anchor_right = 0.128
+anchor_bottom = 0.127
+offset_left = 0.0440063
+offset_top = -0.0919952
+offset_right = 0.0439911
+offset_bottom = 0.203995
+
+[node name="YSortNode" type="Node2D" parent="SlideInMenu"]
+
+[node name="Player" parent="SlideInMenu/YSortNode" instance=ExtResource("1_ek1ap")]
+position = Vector2(0, 100)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlideInMenu/YSortNode/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_ii0ji")
+}
+autoplay = "enter_ring"
+script = ExtResource("4_4ovd5")
+
+[node name="Target1" parent="SlideInMenu/YSortNode" instance=ExtResource("2_rgtgn")]
+position = Vector2(-67.5, -10.25)
+damage = 25
+time_before_punch = 0.5
+SPEED = 3000
+health = 75
+
+[node name="Target2" parent="SlideInMenu/YSortNode" instance=ExtResource("2_rgtgn")]
+position = Vector2(75.5, -10.25)
+damage = 25
+time_before_punch = 0.5
+SPEED = 3000
+health = 75
+
+[node name="GeneralScriptNode" type="Node" parent="."]
+script = ExtResource("5_oguja")
+
+[connection signal="animation_finished" from="SlideInMenu/YSortNode/Player/AnimationPlayer" to="SlideInMenu/YSortNode/Player/AnimationPlayer" method="_on_animation_finished"]

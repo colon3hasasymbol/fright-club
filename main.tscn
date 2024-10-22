@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://cktvsvebadj2w"]
+
+[ext_resource type="PackedScene" uid="uid://c0ckjos1qcgoe" path="res://main_menu/main_menu.tscn" id="1_xkpon"]
+[ext_resource type="Script" path="res://settings/settingsmanager.gd" id="2_30qef"]
+[ext_resource type="Script" path="res://levels/level_manager.gd" id="3_4f8u7"]
+[ext_resource type="Resource" uid="uid://bc7kwwxqgsv" path="res://inventory/player_inventory.tres" id="3_4rfas"]
+[ext_resource type="Script" path="res://music/music_player.gd" id="5_eqmkt"]
+[ext_resource type="AudioStream" uid="uid://k0u627qr0vkf" path="res://music/Fright Club (Fighting Theme).wav" id="5_r8riv"]
+[ext_resource type="AudioStream" uid="uid://df4moxqc20f5u" path="res://music/Fright Club (Menu Theme).wav" id="6_rsggq"]
+
+[sub_resource type="Animation" id="Animation_ybn07"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_15hue"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i75fp"]
+_data = {
+"fade_in": SubResource("Animation_ybn07"),
+"fade_out": SubResource("Animation_15hue")
+}
+
+[node name="Main" type="Node"]
+
+[node name="SettingsManager" type="Node" parent="."]
+script = ExtResource("2_30qef")
+
+[node name="LevelManager" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_4f8u7")
+player_inventory = ExtResource("3_4rfas")
+
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource("5_eqmkt")
+
+[node name="FightingMusic" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("5_r8riv")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MusicPlayer/FightingMusic"]
+libraries = {
+"": SubResource("AnimationLibrary_i75fp")
+}
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource("6_rsggq")
+autoplay = true
+bus = &"Music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MusicPlayer/MenuMusic"]
+libraries = {
+"": SubResource("AnimationLibrary_i75fp")
+}
+
+[node name="MainMenu" parent="." instance=ExtResource("1_xkpon")]
+
+[connection signal="finished" from="MusicPlayer/FightingMusic" to="MusicPlayer/FightingMusic" method="play"]
+[connection signal="finished" from="MusicPlayer/MenuMusic" to="MusicPlayer/MenuMusic" method="play"]

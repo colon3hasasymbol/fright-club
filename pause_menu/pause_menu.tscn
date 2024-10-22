@@ -1,0 +1,103 @@
+[gd_scene load_steps=17 format=3 uid="uid://c8qbro6hpu1h"]
+
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="1_ejo83"]
+[ext_resource type="Texture2D" uid="uid://ccgapto5i4arm" path="res://buttons/IMG_2436.png" id="2_0mm6r"]
+[ext_resource type="Texture2D" uid="uid://dqlly85jogfwb" path="res://buttons/IMG_2435.png" id="3_wrdo4"]
+[ext_resource type="Script" path="res://pause_menu/main_menu_button.gd" id="4_nfqt4"]
+[ext_resource type="Texture2D" uid="uid://kpe7lfxc0pvm" path="res://buttons/IMG_2434.png" id="5_g2i2t"]
+[ext_resource type="Script" path="res://main_menu/settings_button.gd" id="6_geiof"]
+[ext_resource type="Script" path="res://pause_menu/general_script_node.gd" id="7_fs03v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btusn"]
+atlas = ExtResource("2_0mm6r")
+region = Rect2(0, 0, 89, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dda6b"]
+atlas = ExtResource("2_0mm6r")
+region = Rect2(0, 74, 89, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpoe7"]
+atlas = ExtResource("2_0mm6r")
+region = Rect2(0, 38, 89, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slmc5"]
+atlas = ExtResource("3_wrdo4")
+region = Rect2(0, 0, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykbur"]
+atlas = ExtResource("3_wrdo4")
+region = Rect2(0, 74, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7b1g"]
+atlas = ExtResource("3_wrdo4")
+region = Rect2(0, 38, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3rj5"]
+atlas = ExtResource("5_g2i2t")
+region = Rect2(0, 0, 89, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwnj7"]
+atlas = ExtResource("5_g2i2t")
+region = Rect2(0, 74, 89, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njio0"]
+atlas = ExtResource("5_g2i2t")
+region = Rect2(0, 38, 89, 37)
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 6
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_ejo83")
+autoslide = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+color = Color(0.838102, 0, 0.322966, 0.498039)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainerSettings" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer/MarginContainerSettings"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_btusn")
+texture_pressed = SubResource("AtlasTexture_dda6b")
+texture_hover = SubResource("AtlasTexture_wpoe7")
+
+[node name="MarginContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="TextureButton" parent="CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_slmc5")
+texture_pressed = SubResource("AtlasTexture_ykbur")
+texture_hover = SubResource("AtlasTexture_o7b1g")
+script = ExtResource("4_nfqt4")
+
+[node name="MarginContainer3" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingsButton" type="TextureButton" parent="CenterContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_o3rj5")
+texture_pressed = SubResource("AtlasTexture_mwnj7")
+texture_hover = SubResource("AtlasTexture_njio0")
+script = ExtResource("6_geiof")
+
+[node name="GeneralScriptNode" type="Node" parent="."]
+script = ExtResource("7_fs03v")
+
+[connection signal="button_up" from="CenterContainer/VBoxContainer/MarginContainer/MainMenuButton" to="CenterContainer/VBoxContainer/MarginContainer/MainMenuButton" method="_on_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/MarginContainer3/SettingsButton" to="CenterContainer/VBoxContainer/MarginContainer3/SettingsButton" method="_on_button_up"]

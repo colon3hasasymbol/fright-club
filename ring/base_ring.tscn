@@ -1,0 +1,165 @@
+[gd_scene load_steps=21 format=3 uid="uid://6acc0l0s2f0v"]
+
+[ext_resource type="Texture2D" uid="uid://cyxs4o0g5pqpu" path="res://ring/Arena/BkgWITH-LIGHTS.PNG" id="1_4jubh"]
+[ext_resource type="Script" path="res://ring/ring.gd" id="1_ao6jm"]
+[ext_resource type="Texture2D" uid="uid://lcnnijuimwpj" path="res://ring/Arena/Thering.PNG" id="2_o4dvq"]
+[ext_resource type="Texture2D" uid="uid://cqvlse1x2mpqf" path="res://ring/Arena/TimerORhighscore.PNG" id="3_owof0"]
+[ext_resource type="Texture2D" uid="uid://06u4o8v1vj4d" path="res://ring/Arena/Healthbar/BackgroundforENTIREPROGRESSBAR.PNG" id="4_rwusc"]
+[ext_resource type="Texture2D" uid="uid://bbv6rbbc2afml" path="res://ring/Arena/Healthbar/healthbar-UNDER.PNG" id="5_t718s"]
+[ext_resource type="PackedScene" uid="uid://fpi1sp6ktuva" path="res://count_up_label.tscn" id="5_tuie6"]
+[ext_resource type="FontFile" uid="uid://by4rmimwgwhlx" path="res://fonts/slkscr.ttf" id="5_x67pf"]
+[ext_resource type="Texture2D" uid="uid://b60vwag1eirpn" path="res://ring/Arena/Healthbar/healthbar-OVER.PNG" id="6_vnf8u"]
+[ext_resource type="Texture2D" uid="uid://dilg1yqlr2at7" path="res://ring/Arena/Healthbar/better.PNG" id="7_j31yg"]
+[ext_resource type="Script" path="res://ring/texture_progress_bar.gd" id="11_b4p7v"]
+[ext_resource type="AudioStream" uid="uid://c3yxdajoo64xo" path="res://sounds/UI_StartFight_RingBell.wav" id="12_uxk8d"]
+[ext_resource type="Script" path="res://ring/ring_bell.gd" id="13_nqs4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_esu5o"]
+font = ExtResource("5_x67pf")
+font_size = 14
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kdir7"]
+friction = 0.25
+bounce = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hmbli"]
+distance = 2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uxc48"]
+distance = 3.9883
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_umlw8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nfsuk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3yt4s"]
+vertices = PackedVector2Array(250.898, 137.094, 39.2109, 137.898, 69.2188, 73.8828, 223.438, 72.1172)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(234, 56, 275, 153, 14, 154, 59, 58)])
+agent_radius = 16.0
+
+[node name="BaseRing" type="Control"]
+layout_mode = 3
+anchor_right = 0.25
+anchor_bottom = 0.248
+offset_bottom = 0.29599
+script = ExtResource("1_ao6jm")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -464.0
+offset_bottom = -241.776
+texture = ExtResource("1_4jubh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+texture = ExtResource("2_o4dvq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -211.0
+offset_bottom = -141.0
+theme_override_constants/margin_top = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("3_owof0")
+
+[node name="Label" parent="MarginContainer/CenterContainer" instance=ExtResource("5_tuie6")]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 211.0
+offset_bottom = -141.0
+theme_override_constants/margin_top = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("3_owof0")
+
+[node name="Label" type="Label" parent="MarginContainer2/CenterContainer"]
+layout_mode = 2
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_esu5o")
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = -80.0
+offset_bottom = -141.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer3"]
+layout_mode = 2
+texture = ExtResource("4_rwusc")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer3/MarginContainer"]
+layout_mode = 2
+value = 100.0
+rounded = true
+texture_under = ExtResource("5_t718s")
+texture_over = ExtResource("6_vnf8u")
+texture_progress = ExtResource("7_j31yg")
+script = ExtResource("11_b4p7v")
+
+[node name="RingStaticBody" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_kdir7")
+
+[node name="TopCollisionShape" type="CollisionShape2D" parent="RingStaticBody"]
+position = Vector2(144, 46)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_hmbli")
+
+[node name="RightCollisionShape" type="CollisionShape2D" parent="RingStaticBody"]
+position = Vector2(34, 84)
+rotation = 2.00817
+shape = SubResource("WorldBoundaryShape2D_uxc48")
+
+[node name="LeftCollisionShape" type="CollisionShape2D" parent="RingStaticBody"]
+position = Vector2(256, 91)
+rotation = 4.3095
+shape = SubResource("WorldBoundaryShape2D_umlw8")
+
+[node name="BottomCollisionShape" type="CollisionShape2D" parent="RingStaticBody"]
+position = Vector2(148, 161)
+shape = SubResource("WorldBoundaryShape2D_nfsuk")
+
+[node name="NavigationRegion" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_3yt4s")
+
+[node name="RingBell" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_uxk8d")
+volume_db = 12.0
+bus = &"Effects"
+script = ExtResource("13_nqs4h")

@@ -1,0 +1,201 @@
+[gd_scene load_steps=24 format=3 uid="uid://by3sif1rqere"]
+
+[ext_resource type="Script" path="res://target/movement.gd" id="1_gwqvg"]
+[ext_resource type="Script" path="res://attacks/hitbox.gd" id="1_w0mwt"]
+[ext_resource type="Script" path="res://attacks/hitshaker.gd" id="2_mgowk"]
+[ext_resource type="Script" path="res://target/hit_relay.gd" id="3_dio3s"]
+[ext_resource type="AudioStream" uid="uid://b8rb5f4pna0e0" path="res://player/Ghost_Dash_v1_01.wav" id="4_4vvxu"]
+[ext_resource type="Script" path="res://target/sprite.gd" id="4_evwsj"]
+[ext_resource type="AudioStream" uid="uid://b7r32bwsd3ft1" path="res://player/Ghost_Dmg_01_v1.wav" id="5_4sk0r"]
+[ext_resource type="Script" path="res://target/spritedeeznutshahaha.gd" id="5_84ww3"]
+[ext_resource type="SpriteFrames" uid="uid://c66xflnn6pee0" path="res://target/Humans/guy1.tres" id="5_a0kr0"]
+[ext_resource type="Script" path="res://attacks/hitdealer.gd" id="5_djart"]
+[ext_resource type="AudioStream" uid="uid://vi3kijjv3ol0" path="res://player/Ghost_Dmg_02_v1.wav" id="6_oxwm2"]
+[ext_resource type="Script" path="res://target/timer.gd" id="6_sa02c"]
+[ext_resource type="SpriteFrames" uid="uid://d21yq0kyjnpox" path="res://target/Humans/guy2.tres" id="6_so880"]
+[ext_resource type="SpriteFrames" uid="uid://d2712i7wh0xtk" path="res://target/Humans/guy3.tres" id="7_v4yut"]
+[ext_resource type="SpriteFrames" uid="uid://b3qk2yqvxnngc" path="res://target/Humans/guy4.tres" id="8_2vahw"]
+[ext_resource type="SpriteFrames" uid="uid://i8efgenn05gm" path="res://target/Humans/guy5.tres" id="9_rkcgq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxhxl"]
+size = Vector2(15, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjdxj"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sw0nl"]
+streams_count = 3
+stream_0/stream = ExtResource("4_4vvxu")
+stream_1/stream = ExtResource("5_4sk0r")
+stream_2/stream = ExtResource("6_oxwm2")
+
+[sub_resource type="Animation" id="Animation_t3ius"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_u7ugd"]
+resource_name = "pulse_modulate_red"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.74902, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yrdx"]
+_data = {
+"RESET": SubResource("Animation_t3ius"),
+"pulse_modulate_red": SubResource("Animation_u7ugd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opwvv"]
+
+[node name="Target" type="CharacterBody2D"]
+y_sort_enabled = true
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_gwqvg")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qxhxl")
+
+[node name="HitBox" type="Area2D" parent="." groups=["enemies", "targets"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_w0mwt")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_gjdxj")
+
+[node name="HitRelay" type="Node" parent="."]
+script = ExtResource("3_dio3s")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitRelay"]
+stream = SubResource("AudioStreamRandomizer_sw0nl")
+max_polyphony = 8
+bus = &"Effects"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+sprite_frames = ExtResource("9_rkcgq")
+animation = &"punch_d"
+script = ExtResource("5_84ww3")
+
+[node name="HitShaker" type="Node" parent="Sprite"]
+script = ExtResource("2_mgowk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_6yrdx")
+}
+
+[node name="Node" type="Node" parent="Sprite"]
+script = ExtResource("4_evwsj")
+sprite_frames_array = Array[SpriteFrames]([ExtResource("5_a0kr0"), ExtResource("6_so880"), ExtResource("7_v4yut"), ExtResource("8_2vahw"), ExtResource("9_rkcgq")])
+
+[node name="HitDealer" type="Area2D" parent="."]
+script = ExtResource("5_djart")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitDealer"]
+shape = SubResource("RectangleShape2D_opwvv")
+disabled = true
+
+[node name="Timer" type="Timer" parent="HitDealer/CollisionShape"]
+wait_time = 1.5
+one_shot = true
+script = ExtResource("6_sa02c")
+
+[node name="AttackWindupStartArea" type="Area2D" parent="HitDealer"]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitDealer/AttackWindupStartArea"]
+shape = SubResource("RectangleShape2D_opwvv")
+
+[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
+[connection signal="hit_landed" from="HitBox" to="HitRelay" method="_on_target_hit_landed"]
+[connection signal="timeout" from="HitDealer/CollisionShape/Timer" to="HitDealer/CollisionShape/Timer" method="_on_timeout"]
+[connection signal="area_exited" from="HitDealer/AttackWindupStartArea" to="HitDealer/CollisionShape/Timer" method="_on_attack_windup_start_area_area_exited"]

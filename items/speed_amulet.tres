@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://6lhq6s264jx0"]
+
+[ext_resource type="Script" path="res://inventory/inventoryitem.gd" id="1_f2anq"]
+[ext_resource type="Texture2D" uid="uid://b3pu3srbxd2tb" path="res://items/speed_amulet.png" id="2_lqi1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jmsp"]
+atlas = ExtResource("2_lqi1g")
+region = Rect2(795, 326, 837, 837)
+
+[resource]
+script = ExtResource("1_f2anq")
+name = "Amulet Of Speed"
+texture = SubResource("AtlasTexture_1jmsp")

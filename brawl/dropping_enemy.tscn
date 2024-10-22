@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmr12d3efvqvr"]
+
+[ext_resource type="Script" path="res://brawl/dropping_enemy.gd" id="1_d3nuu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fddkq"]
+radius = 65.9697
+
+[node name="DroppingEnemy" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 4
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_d3nuu")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fddkq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

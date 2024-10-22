@@ -1,0 +1,140 @@
+[gd_scene load_steps=19 format=3 uid="uid://bosh1am446ksb"]
+
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="1_efx13"]
+[ext_resource type="Script" path="res://brawl_menu/close_button.gd" id="1_lcpt3"]
+[ext_resource type="Texture2D" uid="uid://cumjlm6mitlge" path="res://buttons/IMG_2451.PNG" id="2_fk5ik"]
+[ext_resource type="Script" path="res://brawl_menu/start_button.gd" id="3_cvfdo"]
+[ext_resource type="Texture2D" uid="uid://dqlly85jogfwb" path="res://buttons/IMG_2435.png" id="4_nh5gq"]
+[ext_resource type="Texture2D" uid="uid://b72be3mw6ovt5" path="res://buttons/IMG_2424.png" id="6_wvykw"]
+[ext_resource type="FontFile" uid="uid://by4rmimwgwhlx" path="res://fonts/slkscr.ttf" id="7_nvd77"]
+[ext_resource type="Script" path="res://brawl_menu/text.gd" id="8_3ywqi"]
+[ext_resource type="Script" path="res://brawl_menu/text2boszo123godammit.gd" id="8_5igx7"]
+[ext_resource type="Script" path="res://brawl_menu/general_script_node.gd" id="8_81h4b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbf4p"]
+atlas = ExtResource("2_fk5ik")
+region = Rect2(0, 0, 256, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8arjf"]
+atlas = ExtResource("2_fk5ik")
+region = Rect2(0, 128, 256, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh8q3"]
+atlas = ExtResource("2_fk5ik")
+region = Rect2(0, 64, 256, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps6ty"]
+atlas = ExtResource("4_nh5gq")
+region = Rect2(0, 0, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogw85"]
+atlas = ExtResource("4_nh5gq")
+region = Rect2(0, 74, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onhcd"]
+atlas = ExtResource("4_nh5gq")
+region = Rect2(0, 38, 96, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5morh"]
+atlas = ExtResource("6_wvykw")
+region = Rect2(199, 74, 85, 31)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sml2u"]
+font = ExtResource("7_nvd77")
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[node name="BrawlMenu" type="CanvasLayer"]
+layer = 3
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_efx13")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.984314, 0.0509804, 0.494118, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="CenterContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_mask = 7
+texture_normal = SubResource("AtlasTexture_kbf4p")
+texture_pressed = SubResource("AtlasTexture_8arjf")
+texture_hover = SubResource("AtlasTexture_yh8q3")
+script = ExtResource("3_cvfdo")
+
+[node name="MarginContainerMainMenu" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="TextureButton" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_ps6ty")
+texture_pressed = SubResource("AtlasTexture_ogw85")
+texture_hover = SubResource("AtlasTexture_onhcd")
+script = ExtResource("1_lcpt3")
+
+[node name="MarginContainerMainMenu2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer"]
+layout_mode = 2
+
+[node name="HighScorePanel" type="TextureRect" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5morh")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="Text" type="Label" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer/MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_sml2u")
+script = ExtResource("8_5igx7")
+
+[node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer"]
+layout_mode = 2
+
+[node name="HighScorePanel" type="TextureRect" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5morh")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="Text" type="Label" parent="CenterContainer/VBoxContainer/MarginContainerMainMenu2/HBoxContainer/CenterContainer3/MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_sml2u")
+script = ExtResource("8_3ywqi")
+
+[node name="GeneralScriptNode" type="Node" parent="."]
+script = ExtResource("8_81h4b")
+
+[connection signal="button_up" from="CenterContainer/VBoxContainer/CenterContainer2/StartButton" to="CenterContainer/VBoxContainer/CenterContainer2/StartButton" method="_on_button_up"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/MarginContainerMainMenu/MainMenuButton" to="CenterContainer/VBoxContainer/MarginContainerMainMenu/MainMenuButton" method="_on_button_up"]

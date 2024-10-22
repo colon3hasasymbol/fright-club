@@ -1,0 +1,196 @@
+[gd_scene load_steps=20 format=3 uid="uid://mxtnlppp8p32"]
+
+[ext_resource type="Script" path="res://menu/slideinmenu.gd" id="1_jnm8i"]
+[ext_resource type="FontFile" uid="uid://by4rmimwgwhlx" path="res://fonts/slkscr.ttf" id="2_ayktt"]
+[ext_resource type="Script" path="res://settings_menu/master_volume_slider.gd" id="2_euby5"]
+[ext_resource type="Script" path="res://settings_menu/music_volume_slider.gd" id="3_bpd1j"]
+[ext_resource type="Script" path="res://settings_menu/effects_volume_slider.gd" id="4_yjskq"]
+[ext_resource type="Script" path="res://settings_menu/main_menu_button.gd" id="5_f42e2"]
+[ext_resource type="Texture2D" uid="uid://cq3udagy8p3t0" path="res://buttons/IMG_2469.PNG" id="6_3eu0c"]
+[ext_resource type="Script" path="res://settings_menu/ok_button.gd" id="7_g4mev"]
+[ext_resource type="Texture2D" uid="uid://c7beqnfhnfgbe" path="res://buttons/IMG_2468.PNG" id="8_53s8j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2npxp"]
+font = ExtResource("2_ayktt")
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3iwf4"]
+font = ExtResource("2_ayktt")
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_op645"]
+font = ExtResource("2_ayktt")
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekwp1"]
+font = ExtResource("2_ayktt")
+font_color = Color(0.486275, 0.521569, 0.803922, 1)
+shadow_size = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sklw"]
+atlas = ExtResource("6_3eu0c")
+region = Rect2(0, 0, 0, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyn3c"]
+atlas = ExtResource("6_3eu0c")
+region = Rect2(0, 72, 0, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_548n4"]
+atlas = ExtResource("6_3eu0c")
+region = Rect2(0, 36, 0, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byde2"]
+atlas = ExtResource("8_53s8j")
+region = Rect2(0, 0, 0, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5e3w"]
+atlas = ExtResource("8_53s8j")
+region = Rect2(0, 72, 0, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbpm2"]
+atlas = ExtResource("8_53s8j")
+region = Rect2(0, 36, 0, 36)
+
+[node name="SettingsMenu" type="CanvasLayer"]
+layer = 8
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_jnm8i")
+autoslide = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+color = Color(0.392157, 0.427451, 0.556863, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "VOLUME"
+label_settings = SubResource("LabelSettings_2npxp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "MASTER"
+label_settings = SubResource("LabelSettings_3iwf4")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeSlider" type="HSlider" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_euby5")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "MUSIC"
+label_settings = SubResource("LabelSettings_op645")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="MusicVolumeSlider2" type="HSlider" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("3_bpd1j")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "EFFECTS"
+label_settings = SubResource("LabelSettings_ekwp1")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/CenterContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("4_yjskq")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.25
+anchor_bottom = 0.25
+offset_top = -41.0
+offset_right = 69.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MainMenuButton" type="TextureButton" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_2sklw")
+texture_pressed = SubResource("AtlasTexture_dyn3c")
+texture_hover = SubResource("AtlasTexture_548n4")
+script = ExtResource("5_f42e2")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.25
+anchor_bottom = 0.25
+offset_left = -45.0
+offset_top = -40.0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="OkButton" type="TextureButton" parent="MarginContainer2"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_byde2")
+texture_pressed = SubResource("AtlasTexture_r5e3w")
+texture_hover = SubResource("AtlasTexture_wbpm2")
+script = ExtResource("7_g4mev")
+
+[connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/MasterVolumeSlider" to="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/MasterVolumeSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer/MusicVolumeSlider2" to="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer/MusicVolumeSlider2" method="_on_value_changed"]
+[connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/CenterContainer/EffectsVolumeSlider" to="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3/CenterContainer/EffectsVolumeSlider" method="_on_value_changed"]
+[connection signal="button_up" from="MarginContainer/MainMenuButton" to="MarginContainer/MainMenuButton" method="_on_button_up"]
+[connection signal="button_up" from="MarginContainer2/OkButton" to="MarginContainer2/OkButton" method="_on_button_up"]
