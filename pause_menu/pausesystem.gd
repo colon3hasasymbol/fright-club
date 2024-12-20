@@ -7,12 +7,14 @@ class PauseSystemSignalContainer:
 	signal enemies_paused_changed(value: bool)
 	signal everything_paused_changed(value: bool)
 
+
 static var signal_container = PauseSystemSignalContainer.new()
 
 static var player_paused = false : set = set_player_paused
 static var input_paused = false : set = set_input_paused
 static var enemies_paused = false : set = set_enemies_paused
 static var everything_paused = true : set = set_everything_paused
+
 
 static func set_player_paused(value: bool): signal_container.player_paused_changed.emit(value); player_paused = value
 static func set_input_paused(value: bool): signal_container.input_paused_changed.emit(value); input_paused = value
